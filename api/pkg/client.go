@@ -81,7 +81,7 @@ func (c *Client) prepareRequest(ctx context.Context, method string, url *url.URL
 }
 
 func (c *Client) do(req *http.Request) (*httpResponse, error) {
-	ctx := req.Context()
+	// ctx := req.Context()
 
 	res, err := c.httpClient.Do(req)
 	if err != nil {
