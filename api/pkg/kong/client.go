@@ -88,7 +88,7 @@ func (c *KongClient) CreateService(ctx context.Context, requestBody CreateServic
 	// if requestBody.Account != nil && requestBody.Alias != nil {
 	// 	return nil, fmt.Errorf("get_alias: quering for account and for alias at the same time its not allowed")
 	// }
-	path := fmt.Sprintf("/services")
+	path := "/services"
 	url := c.client.ResolvePath(path)
 
 	body, err := json.Marshal(requestBody)
@@ -101,13 +101,13 @@ func (c *KongClient) CreateService(ctx context.Context, requestBody CreateServic
 		return nil, fmt.Errorf("create_service: failed performing request: %w", err)
 	}
 
-	if !res.successful {
-		return nil, fmt.Errorf("create_service: failed creating service status code %d, body %s", res.statusCode, string(res.body))
+	if !res.Successful {
+		return nil, fmt.Errorf("create_service: failed creating service status code %d, body %s", res.StatusCode, string(res.Body))
 	}
 
 	decodedResponse := &CreateServiceRespose{}
-	if err := json.Unmarshal(res.body, decodedResponse); err != nil {
-		return nil, fmt.Errorf("create_service: failed decoding response: %w, body: %s", err, string(res.body))
+	if err := json.Unmarshal(res.Body, decodedResponse); err != nil {
+		return nil, fmt.Errorf("create_service: failed decoding response: %w, body: %s", err, string(res.Body))
 	}
 	return decodedResponse, nil
 }
@@ -116,7 +116,7 @@ func (c *KongClient) CreateRoute(ctx context.Context, requestBody CreateRouteReq
 	// if requestBody.Account != nil && requestBody.Alias != nil {
 	// 	return nil, fmt.Errorf("get_alias: quering for account and for alias at the same time its not allowed")
 	// }
-	path := fmt.Sprintf("/routes")
+	path := "/routes"
 	url := c.client.ResolvePath(path)
 
 	body, err := json.Marshal(requestBody)
@@ -129,13 +129,13 @@ func (c *KongClient) CreateRoute(ctx context.Context, requestBody CreateRouteReq
 		return nil, fmt.Errorf("create_route: failed performing request: %w", err)
 	}
 
-	if !res.successful {
-		return nil, fmt.Errorf("create_route: failed creating service status code %d, body %s", res.statusCode, string(res.body))
+	if !res.Successful {
+		return nil, fmt.Errorf("create_route: failed creating service status code %d, body %s", res.StatusCode, string(res.Body))
 	}
 
 	decodedResponse := &CreateRouteResponse{}
-	if err := json.Unmarshal(res.body, decodedResponse); err != nil {
-		return nil, fmt.Errorf("create_route: failed decoding response: %w, body: %s", err, string(res.body))
+	if err := json.Unmarshal(res.Body, decodedResponse); err != nil {
+		return nil, fmt.Errorf("create_route: failed decoding response: %w, body: %s", err, string(res.Body))
 	}
 	return decodedResponse, nil
 }

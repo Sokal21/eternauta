@@ -21,10 +21,10 @@ type Client struct {
 var _ IClient = &Client{}
 
 type httpResponse struct {
-	successful bool
-	statusCode int
-	body       []byte
-	headers    http.Header
+	Successful bool
+	StatusCode int
+	Body       []byte
+	Headers    http.Header
 }
 
 func NewClient(httpClient IHTTPClient, baseUrl string) (*Client, error) {
@@ -94,10 +94,10 @@ func (c *Client) do(req *http.Request) (*httpResponse, error) {
 	}
 
 	return &httpResponse{
-		successful: res.StatusCode >= 200 && res.StatusCode < 300,
-		statusCode: res.StatusCode,
-		body:       body,
-		headers:    res.Header,
+		Successful: res.StatusCode >= 200 && res.StatusCode < 300,
+		StatusCode: res.StatusCode,
+		Body:       body,
+		Headers:    res.Header,
 	}, nil
 }
 
